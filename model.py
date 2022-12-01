@@ -25,16 +25,16 @@ class Model(nn.Module):
         self.layer42 = self.conv_relu(256, 512)
         
         #layer5
-        self.layer51 = self.conv_norm_relu(256+512, 256)
-        self.layer52 = self.conv_norm_relu(256, 256)
+        self.layer51 = self.conv_relu(256+512, 256)
+        self.layer52 = self.conv_relu(256, 256)
         
         #layer6
-        self.layer61 = self.conv_norm_relu(128+256, 128)
-        self.layer62 = self.conv_norm_relu(128, 128)
+        self.layer61 = self.conv_relu(128+256, 128)
+        self.layer62 = self.conv_relu(128, 128)
         
         #layer7
-        self.layer11 = self.conv_norm_relu(64+128, 64)
-        self.layer12 = self.conv_norm_relu(64, 64)
+        self.layer11 = self.conv_relu(64+128, 64)
+        self.layer12 = self.conv_relu(64, 64)
         
         self.conv = nn.Conv3d(64, 3, 1)
         
