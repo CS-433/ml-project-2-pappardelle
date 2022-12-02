@@ -7,19 +7,19 @@ import torch.nn as nn
 import model
 import train
 import dataLoader
-
-logger = utils.get_logger('UNet3D')
+from sklearn.model_selection import train_test_split
 
 def main():
     
     #Generate the data
-    image, mask = dataLoader.generate_data()
+    train_img, train_label = dataLoader.generate_data()
     
-    train_set = ##need to zip them 
+    #splitting the train set 
+    X_train, X_test, y_train, y_test = train_test_split(train_img, train_mask_cat, test_size = 0.20, random_state = 0)
     
-    #need to split it into train and validate set 
-    ############## TO DO ################################
-    val_set =
+    #zipping to train and val set 
+    train_set = torch.cat((X_train, y_train), axis=1)
+    val_set = torch.cat((X_test, y_test), axis=1)
     
     #Device setup
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -43,7 +43,7 @@ def main():
     )
     
     # ===== Train Model =====
-    num_epochs = ##to define
+    num_epochs = 100 #to modify
     
     trainer = train.Trainer(num_epochs=num_epochs, model=model, device=device, criterion=criterion, optimizer=optimizer, train_loader=train_loader, lr_scheduler=scheduler)
     

@@ -30,9 +30,25 @@ def generate_data():
         tifffile.imsave(image_name, data)
         data = torch.from_numpy(data)
         img.append(data)
-
-    #first try, we will only train on the first element of the list 
-    return gt[0], img[0]
+        
+    #first try, we will only train on the first element of the list
+    #samples of 9 images 
+    img_output = torch.empty((1, 9, 1024, 1024), dtype=torch.int16)
+    gt_output = torch.empty((1, 9, 1024, 1024), dtype=torch.int16)
+    
+    for idx in range(0, 171): 
+        start = idx 
+        end = idx+9
+        
+        img1 = img[0][start: end]
+        img1 = img1[None, :]
+        img_output = torch.cat((img_output, img1))
+        
+        gt1 = gt[0][start: end]
+        gt1 = gt1[None, :]
+        gt_output = torch.cat((gt_output, gt1))
+        
+    return img_output, gt_output
 
 def data_loader(train_set, val_set, batch_size):
     train_loader = torch.utils.data.DataLoader(
