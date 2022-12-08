@@ -1,0 +1,3 @@
+[submodule "crop-type-mapping"]
+	path = crop-type-mapping
+	url = git@github.com:roserustowicz/crop-type-mapping.git
