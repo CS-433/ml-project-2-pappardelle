@@ -105,9 +105,7 @@ class Trainer:
             data, target = data.to(self.device), target.to(self.device)
             output = self.model(data)
             test += self.criterion(output, target).item() * len(data)
-            pred = output.argmax(
-                dim=1, keepdim=True
-            )  # get the index of the max log-probability
+            pred = np.armax(output, axis=4)  # get the index of the max log-probability
 
             correct += pred.eq(target.view_as(pred)).sum().item()
 

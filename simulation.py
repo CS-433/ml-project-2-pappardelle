@@ -36,7 +36,10 @@ def main():
     model = Model()
     model = model.to(device=device)
     optimizer = torch.optim.AdamW(model.parameters(), **optimizer_kwargs)
-    criterion = torch.nn.functional.cross_entropy
+    #criterion = torch.nn.functional.cross_entropy
+    crossentropy = nn.CrossEntropyLoss(weight=[0.5, 0.5])
+    dice = DiceLoss(apply_softmax=True, weight=[0.5, 0.5])
+    criterion = CombinedLoss([crossentropy, dice], weight=[0.5, 0.5], device=device)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer,
         T_max=(len(train_loader.dataset) * num_epochs) // train_loader.batch_size,
