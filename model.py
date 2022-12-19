@@ -1,87 +1,56 @@
-import torch.nn as nn
-import torch
+from keras.models import Model
+from keras.layers import Input, Conv3D, MaxPooling3D, UpSampling3D, concatenate, Conv3DTranspose, BatchNormalization, Dropout, Lambda
+from keras.optimizers import Adam
+from keras.layers import Activation, MaxPool2D, Concatenate, LeakyReLU
 
-class Model(nn.Module):
-    def __init__(self):
-        super().__init__()
-        
-        self.down = MaxPool3(2, stride=2)
-        self.up = nn.ConvTranspose3d(2, stride=2)
-        
-        #layer1
-        self.layer11 = self.conv_relu(3, 32)
-        self.layer12 = self.conv_relu(32, 64)
-                
-        #layer2
-        self.layer21 = self.conv_relu(64, 64)
-        self.layer22 = self.conv_relu(64, 128)
-        
-        #layer3
-        self.layer31 = self.conv_relu(128, 128)
-        self.layer32 = self.conv_relu(128, 256)
-        
-        #layer4
-        self.layer41 = self.conv_relu(256, 256)
-        self.layer42 = self.conv_relu(256, 512)
-        
-        #layer5
-        self.layer51 = self.conv_relu(256+512, 256)
-        self.layer52 = self.conv_relu(256, 256)
-        
-        #layer6
-        self.layer61 = self.conv_relu(128+256, 128)
-        self.layer62 = self.conv_relu(128, 128)
-        
-        #layer7
-        self.layer11 = self.conv_relu(64+128, 64)
-        self.layer12 = self.conv_relu(64, 64)
-        
-        self.conv = nn.Conv3d(64, 3, 1)
-        
-    def conv_relu(self, feat_in, feat_out):
-        return nn.Sequential(
-            nn.nn.Conv3d(feat_in, feat_out, kernel_size=3),
-            nn.BatchNorm3d(feat_out),
-            nn.ReLU())
+def conv_block(input, num_filters):
+    x = Conv3D(num_filters, 3, padding="same")(input)
+    x = BatchNormalization()(x)   #Not in the original network. 
+    x = LeakyReLU()(x)
 
-    def forward(self, x):
-        out = self.layer11(x)
-        out = self.layer12(out)
-        sc1 = out
-        
-        out = self.down(out)
-        
-        out = self.layer21(x)
-        out = self.layer22(out)
-        sc2 = out
-        
-        out = self.down(out)
-        
-        out = self.layer31(x)
-        out = self.layer32(out)
-        sc3 = out
-        
-        out = self.down(out)
-        
-        out = self.layer41(x)
-        out = self.layer42(out)
-        
-        out = self.up(out)
-        
-        out = torch.cat((out, sc3), 1)
-        out = self.layer51(x)
-        out = self.layer52(out)
-        
-        out = self.up(out)
-        
-        out = torch.cat((out, sc2), 1)
-        out = self.layer61(x)
-        out = self.layer62(out)
-        
-        out = self.up(out)
-        
-        out = torch.cat((out, sc1), 1)
-        out = self.layer71(x)
-        out = self.layer72(out)
-        
-        return self.conv(out)
+    x = Conv3D(num_filters, 3, padding="same")(x)
+    x = BatchNormalization()(x)  #Not in the original network
+    x = LeakyReLU()(x)
+
+    return x
+
+#Encoder block: Conv block followed by maxpooling
+def encoder_block(input, num_filters):
+    x = conv_block(input, num_filters)
+    p = MaxPooling3D((2, 2, 2))(x)
+    return x, p   
+
+#Decoder block
+#skip features gets input from encoder for concatenation
+def decoder_block(input, skip_features, num_filters):
+    x = Conv3DTranspose(num_filters, (2, 2, 2), strides=2, padding="same")(input)
+    x = Concatenate()([x, skip_features])
+    x = conv_block(x, num_filters)
+    return x
+
+#Build Unet using the blocks
+def build_unet(input_shape, n_classes):
+    inputs = Input(input_shape)
+
+    s1, p1 = encoder_block(inputs, 64)
+    s2, p2 = encoder_block(p1, 128)
+    s3, p3 = encoder_block(p2, 256)
+    s4, p4 = encoder_block(p3, 512)
+
+    b1 = conv_block(p4, 1024) #Bridge
+
+    d1 = decoder_block(b1, s4, 512)
+    d2 = decoder_block(d1, s3, 256)
+    d3 = decoder_block(d2, s2, 128)
+    d4 = decoder_block(d3, s1, 64)
+
+    if n_classes == 1:  #Binary
+        activation = 'sigmoid'
+    else:
+        activation = 'softmax'
+
+    outputs = Conv3D(n_classes, 1, padding="same", activation=activation)(d4)
+    print(activation)
+
+    model = Model(inputs, outputs, name="U-Net")
+    return model
