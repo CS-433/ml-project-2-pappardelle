@@ -19,36 +19,7 @@ We adapted our data set to the provided code.
 
 ### Data set
 Our data set is a hdf5 file with the following file structure: 
-
-
-+-- '/'
-|    +--  test
-|    |    +--  gt
-|    |    |    +--  3306_2040x2040_bin1x1_zStack_02_07_R3D
-|    |    |    +--  473_REF_TL_01
-|    |    |    +--  IBC180_004
-|    |    |    +--  OD301_01
-|    |    |    +--  YSM1396_WT_24h_02_R3D
-|    |    |    +--  YSM3919_pak2Dcdc42mChSW_24h_04_R3D
-|    |    +--  img
-|    |    |    +--  3306_2040x2040_bin1x1_zStack_02_07_R3D
-|    |    |    +--  473_REF_TL_01
-|    |    |    +--  IBC180_004
-|    |    |    +--  OD301_01
-|    |    |    +--  YSM1396_WT_24h_02_R3D
-|    |    |    +--  YSM3919_pak2Dcdc42mChSW_24h_04_R3D
-|    +--  time_lapse_train
-|    |    +--  gt
-|    |    |    +--  wt_pom1D_01_07_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_15_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_20_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_30_R3D_REF.dv
-|    |    +--  img
-|    |    |    +--  wt_pom1D_01_07_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_15_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_20_R3D_REF.dv
-|    |    |    +--  wt_pom1D_01_30_R3D_REF.dv
-
+![alt text](https://github.com/CS-433/ml-project-2-pappardelle/dataset.jpg?raw=true)
 To train our model, we used the **ground truth masks** in `gt` and the **raw images** in `img` of `time_lapse_train`.
 
 #### Folders 
