@@ -19,7 +19,7 @@ We adapted our data set to the provided code.
 
 ### Data set
 Our data set is a hdf5 file with the following file structure: 
-![alt text](https://github.com/CS-433/ml-project-2-pappardelle/dataset.jpg?raw=true)
+![alt text](https://github.com/CS-433/ml-project-2-pappardelle/blob/master/dataset.jpg?raw=true)
 To train our model, we used the **ground truth masks** in `gt` and the **raw images** in `img` of `time_lapse_train`.
 
 #### Folders 
