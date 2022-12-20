@@ -1,7 +1,7 @@
 ## Machine Learning project 2
 
 ### Team 
-This repository contains the code for the project1 of the Machine Learning Course. The team is composed of
+This repository contains the code for the project 2 of the Machine Learning course. The team is composed of
 
    - Ajkuna Seipi (ajkuna.seipi@epfl.ch)
    - Hongyi Shi (hongyi.shi@epfl.ch)
