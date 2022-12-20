@@ -18,8 +18,8 @@ https://github.com/bnsreenu/python_for_image_processing_APEER/blob/master/tutori
 We adapted our data set to the provided code.
 
 ### Data set
-Our data set is a hdf5 file with the following file structure: 
-![alt text](https://github.com/CS-433/ml-project-2-pappardelle/blob/master/dataset.jpg?raw=true{:height="36px" width="36px"}).
+Our data set is a hdf5 file, `datasets.h5df`, with the following file structure: 
+![alt text](https://github.com/CS-433/ml-project-2-pappardelle/blob/master/dataset.jpg?raw=true).
 
 To train our model, we used the **ground truth masks** in `gt` and the **raw images** in `img` of `time_lapse_train`.
 
@@ -28,27 +28,43 @@ To train our model, we used the **ground truth masks** in `gt` and the **raw ima
 - `masks` : contains the ground truth masks from `gt` in tif files.
 
 ### Installation 
-In case you do not use the Google colab link, where no installation is needed, you need to install the following packages to run the code: 
-"" insert the needed packages""
+In case you do not use the Colab notebooks, where ***no installation*** is needed, you need to run those commands (in the order) in your terminal to set up the Keras library and the other requirements: 
+- `pip install tensorflow==1.8`
+- `pip install keras`
+- `pip install -U scikit-learn`
+- `pip install h5py` 
+- `pip install -U tifffile[all]`
+- `pip install patchify`
+- `pip install -U scikit-image`
+
+***Note***: we assume that ***Python***, and ***Pytorch*** are already installed. If not, you need to do those two installation before starting the above requirements. 
 
 ### Running the code 
-To run our code, you need to have a GPU, otherwise the training process will take very long. 
-""insert the google colab link""
+To run our code, you need to have a GPU, otherwise the training process will take very long.
+There is two possibility to run the code. We have used Colab notebooks, but we provide also jupyter notebooks. 
 
 #### Google colab 
 In case your machine does not have a GPU, here is our implmentation on Google colab. You simply need to make a copy on your drive and run each cell one after the other. 
 
-#### Notebook 
-On our repo, you can find two jupyter notebooks to run our code: 
-- `dataset.ipynb` : generates the four images and masks tif files from the initial hdf5 data set. 
-- `train_predict.ipynb` : processes the data set, trains the model with the data set and predicts the masks. 
+Here is the google drive link you can use (https://drive.google.com/drive/folders/1BAC1aMUVkwzKRSpxtzCrZIPlSN38FhkX?usp=sharing). It has the following folders and files: 
 
-#### Python files  
-Another alternative is to simply move to the root folder and execute ` python run.py` to train and predict the masks. 
-The `run.py` file uses the following file of the repo: 
-- `images_maks_generator.py` : contains the method to generate the four pairs of images and masks in tif files. 
-- `data_preprocessing.py` : contains the methods to preprocess of the images and masks. 
-- `dice_coefficient.py` : contains the method computing the **Dice Coefficient** and the **Dice Coefficient Loss**. 
-- `model.py` : contains the methods needed to build the **3D U-Net**: 
-- `run.py` : main method which preprocess the data set, trains the data set with the model built and predicts the masks. 
-- `report.pdf`: a 5-pages report of the complete solution, which describes the whole procedure of our findings.
+***Note***: we had to separate training and prediction of size patches 16x128x128 into different notebooks because the limit of memory did not allow to do both process in the same notebook. For patches of size 16x64x64, training and prediction can be done in the same file. 
+
+- `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128. 
+- `train128.ipynb` : reads the tif files, processes the data set into patches of size 16x128x128, trains the model with the data set 
+- `train_predict64.ipynb` : reads the tif files, processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
+
+- `datasets.h5df`:  initial data set with the structure above. It containes the pair of images and masks to train. 
+
+- `images`: is the folder containing the four images saved into tif files. 
+- `masks`: is the folder containing the four corresponding masks of the four images in `images` folder, saved into tif files as well. 
+
+
+#### Notebook 
+On our repo, you can find two jupyter notebooks to run our code. You only have to run each cell. The notebooks are the same as the one in the google link we provide, in case you want to run the code locally with your own GPU. 
+
+- `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128.
+- `train_predict64.ipynb` : processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
+- `train128.ipynb` : processes the data set into patches of size 16x128x128, trains the model with the data set.
+
+***Note***: we could not upload the initial data set into github so you need to download it by yourself into your local repository. The data set can be found in the google drive link above. You can download it directly from it. 
