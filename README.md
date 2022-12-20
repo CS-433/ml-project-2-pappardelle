@@ -18,14 +18,10 @@ https://github.com/bnsreenu/python_for_image_processing_APEER/blob/master/tutori
 We adapted our data set to the provided code.
 
 ### Data set
-Our data set is a hdf5 file, `datasets.h5df`, with the following file structure: 
+Our data set is a hdf5 file with the following file structure:
 ![alt text](https://github.com/CS-433/ml-project-2-pappardelle/blob/master/dataset.jpg?raw=true).
 
 To train our model, we used the **ground truth masks** in `gt` and the **raw images** in `img` of `time_lapse_train`.
-
-#### Folders 
-- `images` : contains the raw images from `img` in tif files.
-- `masks` : contains the ground truth masks from `gt` in tif files.
 
 ### Installation 
 In case you do not use the Colab notebooks, where ***no installation*** is needed, you need to run those commands (in the order) in your terminal to set up the Keras library and the other requirements: 
@@ -60,7 +56,7 @@ Here is the google drive link you can use (https://drive.google.com/drive/folder
 - `masks`: is the folder containing the four corresponding masks of the four images in `images` folder, saved into tif files as well. 
 
 
-#### Notebook 
+#### Notebooks
 On our repo, you can find two jupyter notebooks to run our code. You only have to run each cell. The notebooks are the same as the one in the google link we provide, in case you want to run the code locally with your own GPU. 
 
 - `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128.
