@@ -30,10 +30,12 @@ In case you do not use the Colab notebooks, where ***no installation*** is neede
 - `pip install -U scikit-learn`
 - `pip install h5py` 
 - `pip install -U tifffile[all]`
-- `pip install patchify`
 - `pip install -U scikit-image`
 
 ***Note***: we assume that ***Python***, and ***Pytorch*** are already installed. If not, you need to do those two installation before starting the above requirements. 
+
+***Note***: you can also install them via your jupyter notebook by adding a `!` just in front of a command, i.e. in a cell just run the following command: 
+- `!pip install tensorflow==1.8`
 
 ### Running the code 
 To run our code, you need to have a GPU, otherwise the training process will take very long.
