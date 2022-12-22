@@ -49,13 +49,13 @@ Here is the google drive link you can use (https://drive.google.com/drive/folder
 ***Note***: we had to separate training and prediction of size patches 16x128x128 into different notebooks because the limit of memory did not allow to do both process in the same notebook. For patches of size 16x64x64, training and prediction can be done in the same file. 
 
 - `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128. 
-- `train128.ipynb` : reads the tif files, processes the data set into patches of size 16x128x128, trains the model with the data set 
-- `train_predict64.ipynb` : reads the tif files, processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
+- `train128.ipynb` : reads the TIF files, processes the data set into patches of size 16x128x128, trains the model with the data set 
+- `train_predict64.ipynb` : reads the TIF files, processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
 
 - `datasets.h5df`:  initial data set with the structure above. It containes the pair of images and masks to train. 
 
-- `images`: is the folder containing the four images saved into tif files. 
-- `masks`: is the folder containing the four corresponding masks of the four images in `images` folder, saved into tif files as well. 
+- `images`: is the folder containing the four images saved into TIF files. 
+- `masks`: is the folder containing the four corresponding masks of the four images in `images` folder, saved into TIF files as well. 
 - `saved_models`: is the folder containing the two best pretrained model we achieved for size patches 16x64x64 and 16x128x128.
 
 
