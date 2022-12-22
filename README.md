@@ -15,7 +15,7 @@ Our implementation of **3D U-Net** is based on the paper [3D U-Net: Learning Den
 For the code implementation, we used the code provided by Dr. Sreenivas Bhattiprolu in the following github link: 
 https://github.com/bnsreenu/python_for_image_processing_APEER/blob/master/tutorial122_3D_Unet.ipynb
 
-We adapted our data set to the provided code.
+We adapted the code to our data set. 
 
 ### Data set
 Our data set is a hdf5 file with the following file structure:
