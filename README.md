@@ -65,6 +65,6 @@ On our repo, you can find two jupyter notebooks to run our code. You only have t
 - `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128.
 - `train_predict64.ipynb` : processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
 - `train128.ipynb` : processes the data set into patches of size 16x128x128, trains the model with the data set.
-- `saved_models`: is the folder containing the two best pretrained model we achieved for size patches 16x64x64 and 16x128x128.
+- `saved_models`: is the folder containing the two best pretrained model we achieved for size patches 16x64x64 and 16x128x128. We could not upload it on github. You can simply download it from the drive, and use it locally. 
 
 ***Note***: we could not upload the initial data set into github so you need to download it by yourself into your local repository. The data set can be found in the google drive link above. You can download it directly from it. 
