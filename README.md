@@ -41,6 +41,8 @@ In case you do not use the Colab notebooks, where ***no installation*** is neede
 To run our code, you need to have a GPU, otherwise the training process will take very long.
 There is two possibility to run the code. We have used Colab notebooks, but we provide also jupyter notebooks. 
 
+**Remark**: we encourage you to use the Google colab notebooks found in the link below.
+
 #### Google colab 
 In case your machine does not have a GPU, here is our implmentation on Google colab. You simply need to make a copy on your drive and run each cell one after the other. 
 
