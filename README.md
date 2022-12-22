@@ -56,6 +56,7 @@ Here is the google drive link you can use (https://drive.google.com/drive/folder
 
 - `images`: is the folder containing the four images saved into tif files. 
 - `masks`: is the folder containing the four corresponding masks of the four images in `images` folder, saved into tif files as well. 
+- `saved_models`: is the folder containing the two best pretrained model we achieved for size patches 16x64x64 and 16x128x128.
 
 
 #### Notebooks
@@ -64,5 +65,6 @@ On our repo, you can find two jupyter notebooks to run our code. You only have t
 - `predict128.ipynb` : ppredicts the masks of initial patches of 16x128x128.
 - `train_predict64.ipynb` : processes the data set into patches of 16x64x64, trains the model with the data set and predicts the masks. 
 - `train128.ipynb` : processes the data set into patches of size 16x128x128, trains the model with the data set.
+- `saved_models`: is the folder containing the two best pretrained model we achieved for size patches 16x64x64 and 16x128x128.
 
 ***Note***: we could not upload the initial data set into github so you need to download it by yourself into your local repository. The data set can be found in the google drive link above. You can download it directly from it. 
