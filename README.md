@@ -1,6 +1,6 @@
 ## Machine Learning project 2
 
-[Link to report](./report.pdf)
+[Link to the report](./report.pdf)
 
 ### Team 
 This repository contains the code for the project 2 of the Machine Learning course. The team is composed of
